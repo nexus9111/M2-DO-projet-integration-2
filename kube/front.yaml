@@ -20,7 +20,7 @@ spec:
             cpu: 100m
             memory: 100Mi
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 
 ---
 
@@ -34,7 +34,7 @@ spec:
   ports:
   - name: http
     port: 80
-    targetPort: 80
+    targetPort: 8080
   type: ClusterIP
 
 ---
@@ -51,5 +51,5 @@ spec:
     name: frontend-service
     weight: 100
   port:
-    targetPort: 80
+    targetPort: 80-tcp
   wildcardPolicy: None
