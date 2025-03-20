@@ -25,5 +25,4 @@ jobs:
 
       - name: Déployer l'image Nginx
         run: |
-          oc delete all -l app=nginx-app || true
-          oc apply -f kube/front.yaml
+          oc apply -f kube/front.yaml 
