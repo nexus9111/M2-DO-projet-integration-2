@@ -9,8 +9,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Checkout du code source
+        uses: actions/checkout
+
       - name: Install oc
         run: |
           curl -LO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz
@@ -24,5 +26,4 @@ jobs:
       - name: Déployer l'image Nginx
         run: |
           oc delete all -l app=nginx-app || true
-          oc new-app nginx --name=nginx-app --strategy=docker
-          oc expose svc/nginx-app
+          oc apply -f kube/front.yaml
