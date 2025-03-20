@@ -21,11 +21,11 @@ jobs:
         run: |
           oc login ${{ secrets.OPENSHIFT_SERVER }} --token=${{ secrets.OPENSHIFT_TOKEN }}
 
-      - name: Deploy hello-world
+      - name: Déployer l'image Nginx
         run: |
-          oc new-app hello-world --name=hello-world-app
-          oc expose svc/hello-world-app
+          oc new-app nginx --name=nginx-app
+          oc expose svc/nginx-app
 
-      - name: Check
+      - name: Vérifier le déploiement
         run: |
-          oc get pods -l app=hello-world-app
+          oc get pods -l app=nginx-app
