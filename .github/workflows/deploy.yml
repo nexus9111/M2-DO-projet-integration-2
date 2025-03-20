@@ -1,0 +1,31 @@
+name: Déployer sur OpenShift
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install oc
+        run: |
+          curl -LO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz
+          tar xzf oc.tar.gz
+          sudo mv oc /usr/local/bin/
+
+      - name: Connect to openshift
+        run: |
+          oc login ${{ secrets.OPENSHIFT_SERVER }} --token=${{ secrets.OPENSHIFT_TOKEN }}
+
+      - name: Deploy hello-world
+        run: |
+          oc new-app hello-world --name=hello-world-app
+          oc expose svc/hello-world-app
+
+      - name: Check
+        run: |
+          oc get pods -l app=hello-world-app
