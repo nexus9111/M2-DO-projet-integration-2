@@ -21,7 +21,7 @@ jobs:
         run: |
           oc login ${{ secrets.OPENSHIFT_SERVER }} --token=${{ secrets.OPENSHIFT_TOKEN }}
 
-      - name: Déployer l'image Nginx avec 500Mi de RAM
+      - name: Déployer l'image Nginx
         run: |
-          oc new-app nginx:1.24~https://github.com/sclorg/nginx-container.git --context-dir=1.24/test/test-app/ --name=nginx-app --strategy=source
+          oc new-app nginx --name=nginx-app --env=MEMORY_LIMIT=500Mi
           oc expose svc/nginx-app
