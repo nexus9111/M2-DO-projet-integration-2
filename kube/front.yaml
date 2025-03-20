@@ -36,3 +36,20 @@ spec:
     port: 80
     targetPort: 80
   type: ClusterIP
+
+---
+
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: niqoumouq-ingress
+  namespace: nexus9111-dev
+spec:
+  host: niqoumouq.apps.rm3.7wse.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: frontend-service
+    weight: 100
+  port:
+    targetPort: 80
+  wildcardPolicy: None
