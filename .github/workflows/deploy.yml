@@ -23,5 +23,5 @@ jobs:
 
       - name: Déployer l'image Nginx avec 500Mi de RAM
         run: |
-          oc new-app nginx:1.24~https://github.com/sclorg/nginx-container.git --context-dir=1.24/test/test-app/ --name=nginx-app
+          oc new-app nginx:1.24~https://github.com/sclorg/nginx-container.git --context-dir=1.24/test/test-app/ --name=nginx-app --strategy=source
           oc expose svc/nginx-app
