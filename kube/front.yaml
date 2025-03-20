@@ -33,7 +33,7 @@ spec:
     tier: frontend
   ports:
   - name: http
-    port: 80
+    port: 8080
     targetPort: 8080
   type: ClusterIP
 
@@ -51,5 +51,5 @@ spec:
     name: frontend-service
     weight: 100
   port:
-    targetPort: 80-tcp
+    targetPort: 8080
   wildcardPolicy: None
