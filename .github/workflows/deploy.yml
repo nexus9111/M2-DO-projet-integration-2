@@ -23,5 +23,6 @@ jobs:
 
       - name: Déployer l'image Nginx
         run: |
+          oc delete all -l app=nginx-app
           oc new-app nginx --name=nginx-app --env=MEMORY_LIMIT=500Mi
           oc expose svc/nginx-app
